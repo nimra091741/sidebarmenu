@@ -68,27 +68,16 @@
 <body>
     <div class="con">
         <h1>Welcome to POS</h1>
-        {{-- </div>
-    <div class='container'> --}}
-
-
 
         @if (Route::has('login'))
             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                 @auth
-                    <button><a href="{{ url('/dashboard') }}">Dashboard</a></button>
+                    <button style="width:100px;"onclick="window.location.href='{{ route('dashboard') }}'">Dashboard</button>
                 @else
-                    {{-- <button></button> --}}
                     <button onclick="window.location.href='{{ route('login') }}'">Login</button>
-
-                    {{-- <button><a href="{{ route('login') }}">Login</a></button> --}}
-
                     @if (Route::has('register'))
                         <button onclick="window.location.href='{{ route('register') }}'">Register</button>
-
-                        {{-- <button><a href="{{ route('register') }}">Register</a></button> --}}
-                    @endif
-                @endauth
+                    @endauth
             </div>
         @endif
 
@@ -96,3 +85,5 @@
 </body>
 
 </html>
+{{-- <button><a href="{{ route('register') }}">Register</a></button> --}}
+@endif

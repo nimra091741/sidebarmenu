@@ -30,6 +30,7 @@
             background-color: rgb(10, 119, 83);
             border-radius: 3px;
             text-align: center;
+            float:right;
         }
 
         .form input {
@@ -100,15 +101,7 @@
 
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
-                    @if (Route::has('password.request'))
-                        <a style="class= 'border-rgb(10, 119, 83) dark:border-rgb(10, 119, 83)
-                        dark:bg-rgb(10, 119, 83) dark:text-rgb(10, 119, 83) focus:border-rgb(10, 119, 83)
-                        dark:focus:border-rgb(10, 119, 83) font-family: Verdana focus:ring-rgb(10, 119, 83) dark:focus:ring-rgb(10, 119, 83) rounded-md shadow-sm !important' "
-                            href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
+
 
                     <button>Log in</button>
 
@@ -120,3 +113,12 @@
 </body>
 
 </html>
+ {{-- <div class="flex items-center justify-end mt-4">
+                    @if (Route::has('password.request'))
+                        <a style="class= 'border-rgb(10, 119, 83) dark:border-rgb(10, 119, 83)
+                        dark:bg-rgb(10, 119, 83) dark:text-rgb(10, 119, 83) focus:border-rgb(10, 119, 83)
+                        dark:focus:border-rgb(10, 119, 83) font-family: Verdana focus:ring-rgb(10, 119, 83) dark:focus:ring-rgb(10, 119, 83) rounded-md shadow-sm !important' "
+                            href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif --}}
