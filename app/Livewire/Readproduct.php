@@ -2,17 +2,21 @@
 
 namespace App\Livewire;
 
+use App\Models\Product;
 use Livewire\Component;
 
 class Readproduct extends Component
-{public $id;
- public function mount($id)
- {
-$this->id=$id;
-dd($id);
- }
+{
+    public $id;
+
+    public function mount($id)
+    {
+        $this->id = $id;
+    }
+
     public function render()
     {
-        return view('livewire.readproduct');
+        $products = Product::where('id', $this->id)->get();
+        return view('livewire.readproduct',['products'=>$products]);
     }
 }

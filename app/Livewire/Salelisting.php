@@ -15,6 +15,14 @@ class Salelisting extends Component
     {
         return redirect()->to(route('createsale'));
     }
+    public function read($id)
+    {
+        return redirect()->to(route('readsales',['id' ,$id]) );
+    }
+    public function update($id)
+    {
+        return redirect()->to(route('updatesales',['id' ,$id]) );
+    }
     public function delete($id)
     {
         $sales = Sale::find($id)->delete();

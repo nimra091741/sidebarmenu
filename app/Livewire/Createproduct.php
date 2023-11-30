@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 use App\Models\Product;
-use Laravel\Prompts\Prompt;
 use Livewire\Component;
 
 class Createproduct extends Component

@@ -15,6 +15,14 @@ class Saledetaillisting extends Component
     {
         return redirect()->to(route('createsaledetail'));
     }
+    public function read($id)
+    {
+        return redirect()->to(route('readsaledetail',['id' ,$id]) );
+    }
+    public function update($id)
+    {
+        return redirect()->to(route('updatesaledetail',['id' ,$id]) );
+    }
     public function delete($id)
     {
         $saledetail = Saledetail::find($id)->delete();

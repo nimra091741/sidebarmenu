@@ -21,7 +21,7 @@ class Createsale extends Component
             Sale::create($product);
 
             session()->flash('message','Sales created successfully.');
-            return redirect()->to(route('productlisting'));
+            return redirect()->to(route('salelisting'));
     }
     public function render()
     {

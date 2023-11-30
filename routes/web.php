@@ -34,6 +34,10 @@ Route::get('/readproduct/{id}', function () {
     return view('readproduct');
 })->name('readproduct');
 
+Route::get('/updateproduct/{id}', function () {
+    return view('updateproduct');
+})->name('updateproduct');
+
 Route::get('/salelisting', function () {
     return view('salelisting');
 })->name('salelisting');
@@ -41,6 +45,14 @@ Route::get('/salelisting', function () {
 Route::get('/createsale', function () {
     return view('createsale');
 })->name('createsale');
+
+Route::get('/readsales/{id}', function () {
+    return view('readsales');
+})->name('readsales');
+
+Route::get('/updatesales/{id}', function () {
+    return view('updatesales');
+})->name('updatesales');
 
 Route::get('/saledetaillisting', function () {
     return view('saledetaillisting');
@@ -50,6 +62,14 @@ Route::get('/createsaledetail', function () {
     return view('createsaledetail');
 })->name('createsaledetail');
 
+Route::get('/readsaledetail/{id}', function () {
+    return view('readsaledetail');
+})->name('readsaledetail');
+
+Route::get('/updatesaledetail/{id}', function () {
+    return view('updatesaledetail');
+})->name('updatesaledetail');
+
 Route::get('/profitexpenselisting', function () {
     return view('profitexpenselisting');
 })->name('profitexpenselisting');
@@ -58,7 +78,13 @@ Route::get('/createprofitexpense', function () {
     return view('createprofitexpense');
 })->name('createprofitexpense');
 
+Route::get('/readprofitexpense/{id}', function () {
+    return view('readprofitexpense');
+})->name('readprofitexpense');
 
+Route::get('/updateprofitexpense/{id}', function () {
+    return view('updateprofitexpense');
+})->name('updateprofitexpense');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

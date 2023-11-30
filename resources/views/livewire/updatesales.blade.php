@@ -77,6 +77,6 @@
                 autofocus autocomplete="date" />
             <x-input-error :messages="$errors->get('date')" class="mt-2" />
 
-            <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Create</button>
+            <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="edit()">Create</button>
     </form>
 </div>

@@ -62,6 +62,10 @@
             @foreach ($profit as $item)
                 <h4>{{ $item->type }}|{{ $item->description }}|{{ $item->amount }}
                 </h4>
+                <a href="{{ url('/readprofitexpense/' . $item->id) }}"
+                    class="btn btn-warning">Read</a>
+                <a href="{{ url('/updateprofitexpense/' . $item->id) }}"
+                    class="btn btn-warning">Update</a>
                <button><a wire:click="delete({{ $item->id }})">Delete</a></button>
             @endforeach
         </div>

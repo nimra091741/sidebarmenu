@@ -67,7 +67,7 @@
 
                 <a href="{{ url('/readproduct/' . $item->id) }}"
                     class="btn btn-warning">Read</a>
-                      <a href="{{ url('/updatevendordetail/' . $item->id) }}"
+                      <a href="{{ url('/updateproduct/' . $item->id) }}"
                         class="btn btn-warning">update</a>
 
                 <button><a wire:click="delete({{ $item->id }})">Delete</a></button>

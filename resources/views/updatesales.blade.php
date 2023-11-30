@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Profit</title>
+    <title>Update Sales</title>
     @livewireStyles()
 </head>
 <body>
-    @livewire('createprofitexpense')
+
+    @livewire('updatesales',['id' =>request('id')])
     @livewireScripts
 </body>
 </html>

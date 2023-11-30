@@ -15,6 +15,14 @@ public $profit;
     {
         return redirect()->to(route('createprofitexpense'));
     }
+    public function read($id)
+    {
+        return redirect()->to(route('readprofitexpense',['id' ,$id]) );
+    }
+    public function update($id)
+    {
+        return redirect()->to(route('updateprofitexpense',['id' ,$id]) );
+    }
     public function delete($id)
     {
         $product = ProfitAndExpense::find($id)->delete();

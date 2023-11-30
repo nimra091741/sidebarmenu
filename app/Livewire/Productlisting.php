@@ -21,6 +21,10 @@ class Productlisting extends Component
     {
         return redirect()->to(route('readproduct',['id' ,$id]) );
     }
+    public function update($id)
+    {
+        return redirect()->to(route('updateproduct',['id' ,$id]) );
+    }
 
     public function delete($id)
     {
