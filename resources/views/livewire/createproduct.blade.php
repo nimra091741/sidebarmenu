@@ -20,11 +20,18 @@
             border: 1px solid black;
             display: grid;
             width: 500px;
-            height: 500px;
+            height: 550px;
             margin: -644px 0 0px 375px;
         }
 
+        .form h1 {
+            margin: 0px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1.5rem;
+        }
+
         .form label {
+            margin: 0px 0px 5px 5px;
             font-size: 0.9rem;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
@@ -32,12 +39,19 @@
         .form input {
             border: 1px solid black;
             border-radius: 5px;
-            margin: -17px 0px 28px 5px;
+            margin: -17px 0px 15px 5px;
             padding: 3px;
         }
 
-        .form button {
+        .form textarea {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: -17px 0px -5px 5px;
+            padding: 3px;
+            height: 70px;
+        }
 
+        .form button {
             color: white;
             border-radius: 5px;
             background: linear-gradient(to bottom, rgb(10, 119, 83), rgb(0, 41, 27));
@@ -48,7 +62,7 @@
         }
     </style>
     <form class="form">
-
+        <h1>Add Product</h1>
         <label for="product_name">Product name</label>
         <input type="text" name="product_name":value="old('product_name')" id="product_name" wire:model="product_name"
             placeholder="Enter your product name" required autofocus autocomplete="product_name" />
@@ -56,8 +70,7 @@
 
 
         <label for="description">Description</label>
-        <input type="text" name="description":value="old('description')" id="description" wire:model="description"
-            placeholder="Enter your description" required autofocus autocomplete="description" />
+        <textarea id="description" name="description" wire:model="description" rows="4" cols="50"></textarea>
         <x-input-error :messages="$errors->get('description')" class="mt-2" />
 
 
@@ -72,6 +85,6 @@
             autocomplete="username" />
         <x-input-error :messages="$errors->get('product_type')" class="mt-2" />
 
-        <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Create</button>
+        <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>
     </form>
 </div>

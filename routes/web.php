@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// routes/web.php
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,6 +32,10 @@ Route::get('/productlisting', function () {
 Route::get('/createproduct', function () {
     return view('createproduct');
 })->name('createproduct');
+
+Route::get('/import', function () {
+    return view('import');
+})->name('import');
 
 Route::get('/readproduct/{id}', function () {
     return view('readproduct');

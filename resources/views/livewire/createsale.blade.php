@@ -23,7 +23,10 @@
         height: 500px;
         margin: -644px 0 0px 375px;
     }
-
+    .form h1{
+margin :0px;            font-family: Verdana;
+font-size: 1.5rem;
+        }
     .form label {
         font-size: 0.9rem;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -49,7 +52,7 @@
         </style>
     <form class="form">
 
-
+        <h1>Add Sales</h1>
         <label for="total_amount" >Total amount</label>
         <input type="number" name="total_amount":value="old('total_amount')" id="total_amount"
         wire:model="total_amount" placeholder="Enter your total amount" required
@@ -77,6 +80,6 @@
                 autofocus autocomplete="date" />
             <x-input-error :messages="$errors->get('date')" class="mt-2" />
 
-            <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Create</button>
+            <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>
     </form>
 </div>

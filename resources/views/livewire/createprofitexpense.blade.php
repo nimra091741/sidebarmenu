@@ -20,8 +20,14 @@
             border: 1px solid black;
             display: grid;
             width: 500px;
-            height: 550px;
+            height: 570px;
             margin: -644px 0 0px 375px;
+        }
+
+        .form h1 {
+            margin: 0px;
+            font-family: Verdana;
+            font-size: 1.5rem;
         }
 
         .form select {
@@ -33,7 +39,7 @@
 
         .form label {
             font-size: 0.9rem;
-            margin: 0 0 5 0px;
+            margin: 0px 0px 8px 5px;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
@@ -42,6 +48,13 @@
             border-radius: 5px;
             margin: -17px 0px 28px 5px;
             padding: 3px;
+        }
+        .form textarea {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: -17px 0px 5px 5px;
+            padding: 3px;
+            height: 70px;
         }
 
         .form button {
@@ -56,7 +69,7 @@
         }
     </style>
     <form class="form">
-
+        <h1>Add Profit/Expense</h1>
 
         <label for="sales_id">Select sales</label>
         <select wire:model="sales_id">
@@ -84,8 +97,7 @@
 
 
         <label for="description">Description</label>
-        <input type="text" name="description":value="old('description')" id="description" wire:model="description"
-            placeholder="Enter your description" required autofocus autocomplete="description" />
+        <textarea id="description" name="description" wire:model="description" rows="4" cols="50"></textarea>
         <x-input-error :messages="$errors->get('description')" class="mt-2" />
 
 
@@ -94,6 +106,6 @@
             placeholder="Enter your amount" required autofocus autocomplete="amount" />
         <x-input-error :messages="$errors->get('amount')" class="mt-2" />
 
-        <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Create</button>
+        <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>
     </form>
 </div>

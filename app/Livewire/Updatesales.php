@@ -7,19 +7,19 @@ use Livewire\Component;
 
 class Updatesales extends Component
 {
-    public $total_amount, $expenditure, $profit, $date, $id, $error_message="Your data is not updated";
+    public  $sales,$total_amount, $expenditure, $profit, $date, $id, $error_message;
 
     public function mount($id)
     {
-        $product = Sale::where('id', $id)->first();
-        $this->total_amount = $product->total_amount;
-        $this->expenditure = $product->expenditure;
-        $this->profit = $product->profit;
-        $this->date = $product->date;
+        $sales = Sale::where('id', $id)->first();
+        $this->total_amount = $sales->total_amount;
+        $this->expenditure = $sales->expenditure;
+        $this->profit = $sales->profit;
+        $this->date = $sales->date;
     }
     public function edit()
     {
-        $product = $this->validate(
+        $sales = $this->validate(
             [
                 'total_amount' => ['required'],
                 'expenditure' => ['required'],
@@ -28,27 +28,30 @@ class Updatesales extends Component
             ]);
 
         try {
-            //code...
+            DB::beginTransaction();
 
             if ($this->id) {
-                DB::beginTransaction();
-                $owner = Sale::find($this->id);
-                if ($owner) {
-                    $owner->update([
+
+                $sales = Sale::find($this->id);
+                if (!empty($sales)) {
+                    $sales->update([
                         'total_amount' => $this->total_amount,
                         'expenditure' => $this->expenditure,
                         'profit' => $this->profit,
                         'date' => $this->date,
                     ]);
                     DB::commit();
-
                     session()->flash('message', "Sales has been updated successfully");
                     return redirect('salelisting');
                 }
+                else{
+                    throw  new \Exception('Data not found!!');
+                }
             }
         } catch (\Exception $e) {
-            $this->error_message = $e->getMessage();
             DB::rollback();
+            $error_message='This data has been deleted recently';
+            $this->error_message = $e->getMessage();
         }
     }
     public function render()

@@ -7,23 +7,26 @@ use Livewire\Component;
 
 class Productlisting extends Component
 {
-    public $products,$id;
+    public $products, $id;
     public function mount()
     {
         $this->products = Product::all();
-
     }
     public function create()
     {
         return redirect()->to(route('createproduct'));
     }
+    public function import()
+    {
+        return redirect()->to(route('import'));
+    }
     public function read($id)
     {
-        return redirect()->to(route('readproduct',['id' ,$id]) );
+        return redirect()->to(route('readproduct', ['id', $id]));
     }
     public function update($id)
     {
-        return redirect()->to(route('updateproduct',['id' ,$id]) );
+        return redirect()->to(route('updateproduct', ['id', $id]));
     }
 
     public function delete($id)

@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Updateproduct extends Component
 {
-    public $product_name, $description, $amount, $product_type, $id, $error_message="Your data is not updated";
+    public $product,$product_name, $description, $amount, $product_type, $id,$error_message;
 
     public function mount($id)
     {
@@ -22,33 +22,34 @@ class Updateproduct extends Component
         $product = $this->validate(
             [
                 'product_name' => ['required', 'string', 'max:225'],
-                'description' => ['required', 'string'],
+                'description' => ['required'],
                 'amount' => ['required'],
                 'product_type' => ['required', 'string'],
             ]
         );
         try {
-            //code...
-
+            DB::beginTransaction();
             if ($this->id) {
-                DB::beginTransaction();
-                $owner = Product::find($this->id);
-                if ($owner) {
-                    $owner->update([
+                $product = Product::find($this->id);
+                if (!empty($product)) {
+                    $product->update([
                         'product_name' => $this->product_name,
                         'description' => $this->description,
                         'amount' => $this->amount,
                         'product_type' => $this->product_type,
                     ]);
                     DB::commit();
-
                     session()->flash('message', "Product has been updated successfully");
                     return redirect('productlisting');
                 }
+                else{
+                    throw  new \Exception('Data not found!!');
+                }
             }
         } catch (\Exception $e) {
-            $this->error_message = $e->getMessage();
             DB::rollback();
+            $error_message='This data has been deleted recently';
+            $this->error_message = $e->getMessage();
         }
     }
     public function render()

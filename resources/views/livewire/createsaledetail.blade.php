@@ -24,9 +24,12 @@
             height: 550px;
             margin: -644px 0 0px 375px;
         }
-
+        .form h1{
+margin :0px;            font-family: Verdana;
+font-size: 1.5rem;
+        }
         .form select {
-
+            height: 40px;
             border: 1px solid black;
             border-radius: 5px;
             margin: : -6px 0px -14px 5px;
@@ -44,6 +47,7 @@
             border-radius: 5px;
             margin: -1px 0px 31px 5px;
             padding:  10px;
+            height: 20px;
         }
 
         .form button {
@@ -59,6 +63,7 @@
     </style>
     <form class="form">
 
+        <h1>Add Sale Details</h1>
         <label for="product_id" >Select product </label>
         <select name="product_id" wire:model="product_id" class="form-control">
             <option value="">Please select</option>
@@ -101,6 +106,6 @@
             placeholder="Enter your gross price" required autofocus autocomplete="username" />
         <x-input-error :messages="$errors->get('gross_price')" class="mt-2" />
 
-        <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Create</button>
+        <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>
     </form>
 </div>
