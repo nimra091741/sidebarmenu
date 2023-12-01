@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire;use Livewire\WithPagination;
+
 use App\Models\Sale;
 use Livewire\Component;
 
 class Salelisting extends Component
 {
-    public $sales;
+      use WithPagination;
+    public function render()
+    {
+        return view('livewire.salelisting',[
+            'sales' => Sale::paginate(12),
+        ]);
+    }
     public function mount()
     {
-        $this->sales = Sale::all();
+        $sales = Sale::orderBy('created_at', 'desc')->get();
     }
     public function create()
     {
@@ -30,8 +37,5 @@ class Salelisting extends Component
         $this->mount();
         return redirect()->to(route('salelisting'));
     }
-    public function render()
-    {
-        return view('livewire.salelisting');
-    }
+
 }

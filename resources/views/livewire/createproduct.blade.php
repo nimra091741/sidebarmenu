@@ -1,6 +1,12 @@
 <div>
     @include('dashboard')
     <style>
+         .form select {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: -17px 0px 28px 5px;
+            padding: 3px;
+        }
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -79,11 +85,14 @@
             placeholder="Enter your amount" required autofocus autocomplete="amount" />
         <x-input-error :messages="$errors->get('amount')" class="mt-2" />
 
-        <label for="product_type">Product type</label>
-        <input type="text" name="product_type":value="old('product_type')" id="product_type"
-            wire:model="product_type" placeholder="Enter your product type" required autofocus
-            autocomplete="username" />
-        <x-input-error :messages="$errors->get('product_type')" class="mt-2" />
+            <label for="product_type">Product type</label>
+            <select name="product_type" id="product_type" wire:model="product_type" required autofocus autocomplete="username">
+                    <option>Please select</option><option value="Finish" >Finish</option>
+
+                 <option value="Unfinished"  >Unfinished</option>
+
+            </select>
+            <x-input-error :messages="$errors->get('product_type')" class="mt-2" />
 
         <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>
     </form>

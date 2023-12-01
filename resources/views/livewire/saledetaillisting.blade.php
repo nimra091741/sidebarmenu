@@ -99,21 +99,24 @@
         @include('dashboard')
 
         <div class="content">
-            <div class="btn "><button><a wire:click="create">Create</a></button></div>
+            <h1 style="color: black !important; margin:0px 0px 10px 0px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 1.5rem;">Sale Details</h1>
 
-            <br><br>
+            <div class="btn "><button style=" margin: 0px 0px 14px 0px;"><a wire:click="create">Create</a></button></div>
+
+
             @if (session()->has('delete'))
                 <div
-                    style="background-color: red;color:white; border: none; border-radius: 3px; display: flex; align-items: center; justify-content: center; height: 30px; width: calc(100% - 10px);">
+                    style="background-color: red;color:white; border: none;margin: 0px 0px 14px 0px; border-radius: 3px; display: flex; align-items: center; justify-content: center; height: 30px; width: calc(100% - 10px);">
 
                     {{ session('delete') }}
                 </div>
             @elseif (session()->has('message'))
                 <div
-                    style="background: linear-gradient(to bottom, rgb(10, 119, 83), rgb(0, 41, 27));color:white; border: none; border-radius: 3px; display: flex; align-items: center; justify-content: center; height: 30px; width: calc(100% - 10px);">
+                    style="background: linear-gradient(to bottom, rgb(10, 119, 83),margin: 0px 0px 14px 0px; rgb(0, 41, 27));color:white; border: none; border-radius: 3px; display: flex; align-items: center; justify-content: center; height: 30px; width: calc(100% - 10px);">
                     {{ session('message') }}
                 </div>
             @endif
+
             <div class="internal">
                 @foreach ($saledetail as $item)
                     <div class="item">
@@ -126,7 +129,7 @@
 
                         <button><a wire:click="delete({{ $item->id }})">Delete</a></button>
                     </div>
-                @endforeach
+                @endforeach{{ $saledetail->links() }}
             </div>
         </div>
     </div>

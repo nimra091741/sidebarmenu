@@ -98,9 +98,15 @@
         <x-input-error :messages="$errors->get('sale_detail_id')" class="mt-2" />
 
 
-        <label for="type">Type</label>
-        <input type="text" wire:model="type" class="form-control" placeholder="Enter your type" />
-        <x-input-error :messages="$errors->get('type')" class="mt-2" />
+            <label for="type">Type</label>
+            <select name="type" id="type" wire:model="type" >
+    <option>Please select</option>
+                <option value="Profit" >Profit</option>
+                <option value="Expense" >Expense</option>
+
+            </select>
+            <x-input-error :messages="$errors->get('type')" class="mt-2" />
+
 
 
         <label for="description">Description</label>

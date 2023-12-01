@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
 
+
+    public function saledetails()
+    {
+        return $this->hasMany(Saledetail::class);
+    }
+
+    public function profits()
+    {
+        return $this->hasMany(ProfitAndExpense::class);
+    }
     public $fillable =
     [
         'total_amount',

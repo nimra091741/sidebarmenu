@@ -56,7 +56,12 @@
         {
             margin: 42px -83px -107px 5px;
         }
-
+        .form select {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: -17px 0px 28px 5px;
+            padding: 3px;
+        }
         .form button {
             color: white;
             border-radius: 5px;
@@ -83,9 +88,14 @@
         <input type="number" class="form-control" wire:model="amount" placeholder="Enter your amount" />
         <x-input-error :messages="$errors->get('amount')" class="mt-2" />
 
-        <label for="product_type">Product type</label>
-        <input type="text" class="form-control" wire:model="product_type" placeholder="Enter your product type" />
-        <x-input-error :messages="$errors->get('product_type')" class="mt-2" />
+            <label for="product_type">Product type</label>
+            <select name="product_type" id="product_type" wire:model="product_type" required autofocus autocomplete="username">
+                <option value="Finish" >Finish</option>
+                 <option>Please select</option>
+                 <option value="Unfinished"  >Unfinished</option>
+
+            </select>
+            <x-input-error :messages="$errors->get('product_type')" class="mt-2" />
 
 
         @if (empty($error_message))

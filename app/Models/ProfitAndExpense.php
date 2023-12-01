@@ -7,7 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfitAndExpense extends Model
 {
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
 
+    public function saledetail()
+    {
+        return $this->belongsTo(Saledetail::class);
+    }
     public $fillable =
     [
         'sales_id',

@@ -71,7 +71,31 @@
     <form class="form">
         <h1>Add Profit/Expense</h1>
 
-        <label for="sales_id">Select sales</label>
+            <label for="type">Type</label>
+            <select name="type" id="type" wire:model="type" >
+                <option>Please select</option>
+                <option value="Profit" >Profit</option>
+                <option value="Expense" >Expense</option>
+            </select>
+            <x-input-error :messages="$errors->get('type')" class="mt-2" />
+
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" wire:model="description" rows="4" cols="50"></textarea>
+        <x-input-error :messages="$errors->get('description')" class="mt-2" />
+
+
+        <label for="amount">Total Amount</label>
+        <input type="number" name="amount":value="old('amount')" id="amount" wire:model="amount"
+            placeholder="Enter your of profit/expense" required autofocus autocomplete="amount" />
+        <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+
+        <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>
+    </form>
+</div>
+
+
+     {{-- <label for="sales_id">Select sales</label>
         <select wire:model="sales_id">
             <option>Please select</option>
             @foreach ($sales as $item)
@@ -88,24 +112,4 @@
             @endforeach
         </select>
         <x-input-error :messages="$errors->get('sale_detail_id')" class="mt-2" />
-
-
-        <label for="type">Type</label>
-        <input type="text" name="type":value="old('type')" id="type" wire:model="type"
-            placeholder="Enter your type" required autofocus autocomplete="type" />
-        <x-input-error :messages="$errors->get('type')" class="mt-2" />
-
-
-        <label for="description">Description</label>
-        <textarea id="description" name="description" wire:model="description" rows="4" cols="50"></textarea>
-        <x-input-error :messages="$errors->get('description')" class="mt-2" />
-
-
-        <label for="amount">Total Amount</label>
-        <input type="number" name="amount":value="old('amount')" id="amount" wire:model="amount"
-            placeholder="Enter your amount" required autofocus autocomplete="amount" />
-        <x-input-error :messages="$errors->get('amount')" class="mt-2" />
-
-        <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>
-    </form>
-</div>
+  --}}

@@ -24,10 +24,13 @@
             height: 550px;
             margin: -644px 0 0px 375px;
         }
-        .form h1{
-margin :0px;            font-family: Verdana;
-font-size: 1.5rem;
+
+        .form h1 {
+            margin: 0px;
+            font-family: Verdana;
+            font-size: 1.5rem;
         }
+
         .form select {
             height: 40px;
             border: 1px solid black;
@@ -37,7 +40,7 @@ font-size: 1.5rem;
         }
 
         .form label {
-            font-size:0.9rem;
+            font-size: 0.9rem;
             margin: 0 0 5 0px;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
@@ -46,7 +49,7 @@ font-size: 1.5rem;
             border: 1px solid black;
             border-radius: 5px;
             margin: -1px 0px 31px 5px;
-            padding:  10px;
+            padding: 10px;
             height: 20px;
         }
 
@@ -64,9 +67,12 @@ font-size: 1.5rem;
     <form class="form">
 
         <h1>Add Sale Details</h1>
-        <label for="product_id" >Select product </label>
-        <select name="product_id" wire:model="product_id" class="form-control">
+
+
+        <label for="product_id">Select product </label>
+        <select name="product_id" wire:model="product_id" class="form-control" style="height:50px;">
             <option value="">Please select</option>
+
             @foreach ($product as $item)
                 <option value="{{ $item['id'] }}">{{ $item['product_name'] }}</option>
             @endforeach
@@ -75,16 +81,19 @@ font-size: 1.5rem;
             <span style="color: red;">{{ $message }}</span><br>
         @enderror
 
-        <label for="sales_id" >Select sales</label>
-        <select name="sales_id" wire:model="sales_id" class="form-control">
-            <option value="">Please select</option>
-            @foreach ($sales as $item)
-                <option value="{{ $item['id'] }}">{{ $item['date'] }}</option>
-            @endforeach
-        </select><br>
-        @error('sales_id')
-            <span style="color: red;">{{ $message }}</span><br>
-        @enderror
+
+
+    {{-- <label for="sales_id">Select sales</label>
+    <select name="sales_id" wire:model="sales_id" class="form-control">
+        <option value="">Please select</option>
+        @foreach ($sales as $item)
+            <option value="{{ $item['id'] }}">{{ $item['date'] }}</option>
+        @endforeach
+    </select><br>
+    @error('sales_id')
+        <span style="color: red;">{{ $message }}</span><br>
+    @enderror --}}
+
 
 
         <label for="product_price_with_profit">Product price</label>

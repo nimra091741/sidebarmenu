@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Livewire;
+
+namespace App\Livewire; use Livewire\WithPagination;
 use App\Models\ProfitAndExpense;
 use Livewire\Component;
 
 class Profitexpenselisting extends Component
 {
-public $profit;
+  use WithPagination;
+public function render()
+    {
+        return view('livewire.profitexpenselisting',[
+            'profit' => ProfitAndExpense::paginate(12),
+        ]);
+    }
     public function mount()
     {
-        $this->profit = ProfitAndExpense::all();
+        $profit = ProfitAndExpense::orderBy('created_at', 'desc')->get();
     }
     public function create()
     {
@@ -30,8 +37,5 @@ public $profit;
         $this->mount();
         return redirect()->to(route('profitexpenselisting'));
     }
-    public function render()
-    {
-        return view('livewire.profitexpenselisting');
-    }
+
 }

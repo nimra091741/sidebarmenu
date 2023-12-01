@@ -1,15 +1,23 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire;use Livewire\WithPagination;
+
 use App\Models\Saledetail;
 use Livewire\Component;
 
 class Saledetaillisting extends Component
 {
-    public $saledetail;
+      use WithPagination;
+    public function render()
+    {
+        $saledetail = Saledetail::orderBy('created_at', 'desc')->get();
+        return view('livewire.saledetaillisting',[
+            'saledetail' => Saledetail::paginate(12),
+        ]);
+    }
     public function mount()
     {
-        $this->saledetail = Saledetail::all();
+        $saledetail = Saledetail::orderBy('created_at', 'desc')->get();
     }
     public function create()
     {
@@ -29,9 +37,5 @@ class Saledetaillisting extends Component
         session()->flash('delete', 'Successfully, data deleted.');
         $this->mount();
         return redirect()->to(route('saledetaillisting'));
-    }
-    public function render()
-    {
-        return view('livewire.saledetaillisting');
     }
 }
