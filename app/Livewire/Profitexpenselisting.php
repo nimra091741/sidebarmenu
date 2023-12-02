@@ -11,13 +11,13 @@ class Profitexpenselisting extends Component
 public function render()
     {
         return view('livewire.profitexpenselisting',[
-            'profit' => ProfitAndExpense::paginate(12),
+            'profit' => ProfitAndExpense::orderBy('created_at', 'desc')->paginate(12),
         ]);
     }
-    public function mount()
-    {
-        $profit = ProfitAndExpense::orderBy('created_at', 'desc')->get();
-    }
+    // public function mount()
+    // {
+    //     $profit = ProfitAndExpense::orderBy('created_at', 'desc')->get();
+    // }
     public function create()
     {
         return redirect()->to(route('createprofitexpense'));

@@ -84,7 +84,8 @@
         <x-input-error :messages="$errors->get('profit')" class="mt-2" /><br>
 
         {{-- saledetails --}}
-        sale details data
+        Sale Details data
+
         <label for="product_id">Select product </label>
         <select name="product_id" wire:model.live="product_id" class="form-control" style="height:50px;">
             <option value="">Please select</option>
@@ -95,6 +96,8 @@
         @error('product_id')
             <span style="color: red;">{{ $message }}</span><br>
         @enderror
+
+        <button class="btn btn-secondary ml-2" wire:click.prevent="resetField()">+</button><br>
 
         <label for="product_price_with_profit"> One Product price</label>
         <input type="number" name="product_price_with_profit":value="old('product_price_with_profit')"
