@@ -10,13 +10,15 @@ class Createproduct extends Component
 
     public $product_name, $description, $amount, $product_type;
 
+    // protected $rules =
+
     public function store()
     {
         $product = $this->validate(
             [
                 'product_name' => ['required','string','max:225'],
                 'description' => ['required',],
-                'amount' => ['required'],
+                'amount' => ['required'], //numeric
                 'product_type' =>['required','string'],
             ]);
 

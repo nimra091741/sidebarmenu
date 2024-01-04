@@ -1,5 +1,4 @@
 <div>
-    @include('dashboard')
 
     <style>
         /* Chrome, Safari, Edge, Opera */
@@ -25,13 +24,13 @@
             margin: -644px 0 0px 375px;
         }
 
-        .form h1 {
+        .form h1 {user-select: none;
             margin: 0px;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 1.5rem;
         }
 
-        .form label {
+        .form label {user-select: none;
             margin: 0px 0px 5px 5px;
             font-size: 0.9rem;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -44,25 +43,27 @@
             padding: 3px;
         }
 
-        .form textarea
-        {
+        .form textarea {
             border: 1px solid black;
             border-radius: 5px;
             margin: -17px 0px -5px 5px;
             padding: 3px;
             height: 70px;
         }
-        .form .good
-        {
+
+        .form .good {
             margin: 42px -83px -107px 5px;
         }
+
         .form select {
             border: 1px solid black;
             border-radius: 5px;
             margin: -17px 0px 28px 5px;
             padding: 3px;
         }
+
         .form button {
+            border:none;
             color: white;
             border-radius: 5px;
             background: linear-gradient(to bottom, rgb(10, 119, 83), rgb(0, 41, 27));
@@ -77,25 +78,34 @@
         <h1>Update Product</h1>
         <label for="product_name">Product name</label>
         <input type="text" class="form-control" wire:model="product_name" placeholder="Enter your product name" />
-        <x-input-error :messages="$errors->get('product_name')" class="mt-2" />
+        @error('product_name')
+            <span>{{ $message }}</span>
+        @enderror
 
         <label for="description">Description</label>
         <textarea id="description" name="description" wire:model="description" rows="4" cols="50"></textarea>
-        <x-input-error :messages="$errors->get('description')" class="mt-2" />
+        @error('description')
+            <span>{{ $message }}</span>
+        @enderror
 
 
         <label for="amount">Amount</label>
         <input type="number" class="form-control" wire:model="amount" placeholder="Enter your amount" />
-        <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+        @error('amount')
+            <span>{{ $message }}</span>
+        @enderror
 
-            <label for="product_type">Product type</label>
-            <select name="product_type" id="product_type" wire:model="product_type" required autofocus autocomplete="username">
-                <option value="Finish" >Finish</option>
-                 <option>Please select</option>
-                 <option value="Unfinished"  >Unfinished</option>
+        <label for="product_type">Product type</label>
+        <select name="product_type" id="product_type" wire:model="product_type" required autofocus
+            autocomplete="username">
+            <option value="Finish">Finish</option>
+            <option>Please select</option>
+            <option value="Unfinished">Unfinished</option>
 
-            </select>
-            <x-input-error :messages="$errors->get('product_type')" class="mt-2" />
+        </select>
+        @error('product_type')
+            <span>{{ $message }}</span>
+        @enderror
 
 
         @if (empty($error_message))
@@ -111,3 +121,4 @@
 
     </form>
 </div>
+{{-- @include('dashboard') --}}

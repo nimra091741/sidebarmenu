@@ -1,12 +1,12 @@
 <div>
-    @include('dashboard')
     <style>
-         .form select {
+        .form select {
             border: 1px solid black;
             border-radius: 5px;
             margin: -17px 0px 28px 5px;
             padding: 3px;
         }
+
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -72,28 +72,39 @@
         <label for="product_name">Product name</label>
         <input type="text" name="product_name":value="old('product_name')" id="product_name" wire:model="product_name"
             placeholder="Enter your product name" required autofocus autocomplete="product_name" />
-        <x-input-error :messages="$errors->get('product_name')" class="mt-2" />
+        @error('product_name')
+            <span>{{ $message }}</span>
+        @enderror
 
 
         <label for="description">Description</label>
         <textarea id="description" name="description" wire:model="description" rows="4" cols="50"></textarea>
-        <x-input-error :messages="$errors->get('description')" class="mt-2" />
+        @error('description')
+            <span>{{ $message }}</span>
+        @enderror
 
 
         <label for="amount">Amount</label>
         <input type="number" name="amount":value="old('amount')" id="amount" wire:model="amount"
             placeholder="Enter your amount" required autofocus autocomplete="amount" />
-        <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+            @error('amount')
+            <span>{{ $message }}</span>
+        @enderror
 
-            <label for="product_type">Product type</label>
-            <select name="product_type" id="product_type" wire:model="product_type" required autofocus autocomplete="username">
-                    <option>Please select</option><option value="Finish" >Finish</option>
+        <label for="product_type">Product type</label>
+        <select name="product_type" id="product_type" wire:model="product_type" required autofocus
+            autocomplete="username">
+            <option>Please select</option>
+            <option value="Finish">Finish</option>
 
-                 <option value="Unfinished"  >Unfinished</option>
+            <option value="Unfinished">Unfinished</option>
 
-            </select>
-            <x-input-error :messages="$errors->get('product_type')" class="mt-2" />
+        </select>
+        @error('product_type')
+            <span>{{ $message }}</span>
+        @enderror
 
         <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>
     </form>
 </div>
+{{-- @include('dashboard') --}}

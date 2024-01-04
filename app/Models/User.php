@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
     ];
 
     /**
@@ -31,6 +32,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'status',
     ];
 
     /**
@@ -38,8 +40,12 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
+    //     protected $casts = [
 
-        'password' => 'hashed',
-    ];
+    //         'password' => 'bcrypt',
+    //     ];
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = bcrypt($value);
+    // }
 }

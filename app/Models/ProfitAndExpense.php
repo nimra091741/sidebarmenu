@@ -9,13 +9,14 @@ class ProfitAndExpense extends Model
 {
     public function sale()
     {
-        return $this->belongsTo(Sale::class);
+        return $this->belongsTo(Sale::class, 'sales_id');
     }
 
+
     public function saledetail()
-    {
-        return $this->belongsTo(Saledetail::class);
-    }
+{
+    return $this->belongsTo(Saledetail::class,  'sale_detail_id');
+}
     public $fillable =
     [
         'sales_id',
@@ -23,7 +24,6 @@ class ProfitAndExpense extends Model
         'type',
         'description',
         'amount',
-
     ];
     use HasFactory;
 }

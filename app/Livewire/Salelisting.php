@@ -1,41 +1,46 @@
 <?php
 
-namespace App\Livewire;use Livewire\WithPagination;
+namespace App\Livewire;
+
+use Livewire\WithPagination;
 
 use App\Models\Sale;
 use Livewire\Component;
 
 class Salelisting extends Component
 {
-      use WithPagination;
+    use WithPagination;
     public function render()
     {
-        return view('livewire.salelisting',[
-            'sales' => Sale::orderBy('created_at', 'desc')->paginate(12),
+        return view('livewire.salelisting', [
+            'sales' => Sale::orderBy('created_at', 'desc')->paginate(10),
         ]);
     }
-    // public function mount()
-    // {
-    //     $sales = Sale::orderBy('created_at', 'desc')->get();
-    // }
-    public function create()
+    public $error_message = "Deletion not done.";
+    public function delete()
     {
-        return redirect()->to(route('createsale'));
+
+        $sale = Sale::find($this->itemId);
+        try {
+            $sale->saledetails()->delete();
+            $sale->profits()->delete();
+            $sale->delete();
+            session()->flash('delete', 'Successfully, data deleted.');
+        } catch (\Exception $e) {
+
+            $this->error_message = $e->getMessage();
+        }
+        $this->delete_modal = false;
+        // return redirect()->to(route('salelisting'));
     }
-    public function read($id)
+    public $itemId, $delete_modal = false;
+    public function openModal($id)
     {
-        return redirect()->to(route('readsales',['id' ,$id]) );
+        $this->delete_modal = true;
+        $this->itemId = $id;
     }
-    public function update($id)
+    public function back()
     {
-        return redirect()->to(route('updatesales',['id' ,$id]) );
-    }
-    public function delete($id)
-    {
-        $sales = Sale::find($id)->delete();
-        session()->flash('delete', 'Successfully, data deleted.');
-        $this->mount();
         return redirect()->to(route('salelisting'));
     }
-
 }

@@ -11,12 +11,12 @@ class Sale extends Model
 
     public function saledetails()
     {
-        return $this->hasMany(Saledetail::class);
+        return $this->hasMany(Saledetail::class,  'sales_id');
     }
 
     public function profits()
     {
-        return $this->hasMany(ProfitAndExpense::class);
+        return $this->hasMany(ProfitAndExpense::class, 'sales_id');
     }
     public $fillable =
     [

@@ -9,7 +9,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+// use Illuminate\Support\Facades\bcrypt;
+use Illuminate\Support\Facades\bcrypt;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -39,13 +40,15 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' =>$request->password,
+            // 'password' => bcrypt($request->password),
+
         ]);
 
         event(new Registered($user));
+        return redirect('login');
 
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        // Auth::login($user);
+        // return redirect(RouteServiceProvider::HOME);
     }
 }

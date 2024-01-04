@@ -7,16 +7,21 @@ use Livewire\Component;
 
 class Readproduct extends Component
 {
-    public $id;
+
+    public $product,$product_name, $description, $amount, $product_type, $id;
 
     public function mount($id)
     {
-        $this->id = $id;
+        $product = Product::where('id', $id)->first();
+        $this->product_name = $product->product_name;
+        $this->description = $product->description;
+        $this->amount = $product->amount;
+        $this->product_type = $product->product_type;
     }
 
     public function render()
     {
-        $products = Product::where('id', $this->id)->get();
-        return view('livewire.readproduct',['products'=>$products]);
+
+        return view('livewire.readproduct');
     }
 }

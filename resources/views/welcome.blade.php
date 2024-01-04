@@ -44,16 +44,16 @@
 
         .con button {
             font-family: Verdana;
-            border: none;
+            border: none; width: 75px; height: 25px;
             color: white;
             background: none;
             /* transition: font-size 0.7s; */
         }
 
         .con button:hover {
-            font-size: 1rem;
-            width: 84px;
-            height: 25px;
+            /* font-size: 1rem; */
+            /* width: 60px; */
+            /* height: 25px; */
             background-color: white;
             border-radius: 4px;
             color: black;
@@ -72,14 +72,14 @@
         @if (Route::has('login'))
             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                 @auth
-                    <button style="width:100px;"onclick="window.location.href='{{ route('dashboard') }}'">Dashboard</button>
+                    <button style="width:100px;"onclick="window.location.href='{{ route('productlisting') }}'">Dashboard</button>
                 @else
-                    <button onclick="window.location.href='{{ route('login') }}'">Login</button>
-                    @if (Route::has('register'))
-                        <button onclick="window.location.href='{{ route('register') }}'">Register</button>
+                    <button onclick="window.location.href='{{ route('loginpage') }}'">Login</button>
+                    {{-- @if (Route::has('register')) --}}
+                        {{-- <button onclick="window.location.href='{{ route('register') }}'">Register</button> --}}
                     @endauth
             </div>
-        @endif
+        {{-- @endif --}}
 
     </div>
 </body>

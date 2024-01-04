@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+// use Illuminate\Http\Request;
+// use App\Http\Requests\Auth\Log;
 
 class LoginRequest extends FormRequest
 {
@@ -40,15 +44,13 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
-
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+          if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
         }
-
         RateLimiter::clear($this->throttleKey());
     }
 
@@ -62,11 +64,8 @@ class LoginRequest extends FormRequest
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
-
         event(new Lockout($this));
-
         $seconds = RateLimiter::availableIn($this->throttleKey());
-
         throw ValidationException::withMessages([
             'email' => trans('auth.throttle', [
                 'seconds' => $seconds,
@@ -74,7 +73,6 @@ class LoginRequest extends FormRequest
             ]),
         ]);
     }
-
     /**
      * Get the rate limiting throttle key for the request.
      */
@@ -83,3 +81,25 @@ class LoginRequest extends FormRequest
         return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
     }
 }
+    // public function authenticate(): void
+    // {
+    //     $this->ensureIsNotRateLimited();
+
+    //     $credentials = $this->only('email', 'password');
+
+    //     // Retrieve the user by email (assuming 'email' is the unique identifier)
+    //     $user = User::where('email', $credentials['email'])->first();
+
+    //     if ($user && Hash::check($credentials['password'], $user->password)) {
+    //         // Password is correct
+    //         Auth::login($user, $this->boolean('remember'));
+    //         RateLimiter::clear($this->throttleKey());
+    //     } else {
+    //         // Password is incorrect
+    //         RateLimiter::hit($this->throttleKey());
+
+    //         throw ValidationException::withMessages([
+    //             'email' => __('auth.failed'),
+    //         ]);
+    //     }
+    // }
