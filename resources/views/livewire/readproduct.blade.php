@@ -1,5 +1,5 @@
 
-<div>
+<div style=" pointer-events: none;" >
 
 
     <style>
@@ -16,8 +16,8 @@
         }
 
         .form {
-            pointer-events: none;
-            background-color: rgb(225, 241, 222);
+
+          background-color: rgb(225, 241, 222);
             border-radius: 5px;
             padding: 25px;
             border: 1px solid black;
@@ -42,6 +42,7 @@
 
         .form input {
             user-select:none;
+
             border: 1px solid black;
             border-radius: 5px;
             margin: -17px 0px 15px 5px;

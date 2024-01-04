@@ -88,7 +88,8 @@
             text-decoration: none;
             background: linear-gradient(to bottom, rgb(10, 119, 83), rgb(0, 41, 27));
         }
-        .internal table a
+        .internal table a,
+        .internal table button
         {
             pointer-events: auto;
             font-size: 0.8rem;
@@ -184,13 +185,9 @@
     <h1
         style="color: black !important; margin:0px 0px 10px 0px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 1.5rem;">
         Products</h1>
-{{-- padding: 10px 20px; --}}
 
 
         <a href="{{ url('/createproduct/') }}">Create</a>
-   {{-- style="color: rgb(255, 255, 255); text-decoration: none;
-   background: linear-gradient(to bottom, rgb(10, 119, 83), rgb(0, 41, 27));
-     display: inline-block; border-radius: 5px; cursor: pointer;" --}}
 
     @if (session()->has('delete'))
         <br><br>
@@ -200,7 +197,7 @@
                     border: none; border-radius: 3px; display: flex; align-items: center; justify-content: center; height: 30px; ">
             {{ session('delete') }}
         </div>
-    @elseif (session()->has('message'))
+         @elseif (session()->has('message'))
         <br><br>
         <div
             style="background: linear-gradient(to bottom, rgb(10, 119, 83), rgb(0, 41, 27));

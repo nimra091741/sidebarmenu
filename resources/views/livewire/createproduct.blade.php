@@ -69,39 +69,37 @@
     </style>
     <form class="form">
         <h1>Add Product</h1>
-        <label for="product_name">Product name</label>
+        <label for="product_name">Product name*</label>
         <input type="text" name="product_name":value="old('product_name')" id="product_name" wire:model="product_name"
             placeholder="Enter your product name" required autofocus autocomplete="product_name" />
         @error('product_name')
-            <span>{{ $message }}</span>
+           <span style="color:red;">{{ $message }}</span>
         @enderror
 
 
-        <label for="description">Description</label>
+        <label for="description">Description*</label>
         <textarea id="description" name="description" wire:model="description" rows="4" cols="50"></textarea>
         @error('description')
-            <span>{{ $message }}</span>
+            <span style="color:red;">{{ $message }}</span>
         @enderror
 
-
-        <label for="amount">Amount</label>
+        <label for="amount">Amount*</label>
         <input type="number" name="amount":value="old('amount')" id="amount" wire:model="amount"
             placeholder="Enter your amount" required autofocus autocomplete="amount" />
             @error('amount')
-            <span>{{ $message }}</span>
+           <span style="color:red;">{{ $message }}</span>
         @enderror
 
-        <label for="product_type">Product type</label>
+        <label for="product_type">Product type*</label>
         <select name="product_type" id="product_type" wire:model="product_type" required autofocus
             autocomplete="username">
-            <option>Please select</option>
+            <option >Please select</option>
             <option value="Finish">Finish</option>
-
             <option value="Unfinished">Unfinished</option>
 
         </select>
         @error('product_type')
-            <span>{{ $message }}</span>
+            <span style="color:red;">{{ $message }}</span>
         @enderror
 
         <button class="btn btn-primary col-md-2" style="margin-top: 10px;" wire:click.prevent="store()">Add</button>

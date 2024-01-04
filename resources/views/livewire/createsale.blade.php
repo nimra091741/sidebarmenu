@@ -1,4 +1,4 @@
-<div >
+<div>
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -9,6 +9,7 @@
         input[type=number] {
             -moz-appearance: textfield;
         }
+
         .form {
 
             font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -17,6 +18,7 @@
             /* user-select:none; */
             /* pointer-events: auto; */
         }
+
         body .form table {
             padding: 10px;
             border-collapse: collapse;
@@ -26,6 +28,7 @@
             margin-top: 10px;
             border: 2px solid #ccc;
         }
+
         .form table th {
             user-select: none;
             padding: 5px;
@@ -34,13 +37,16 @@
             background-color: rgb(190, 207, 186);
             font-weight: bold;
         }
+
         .form table tr {
             width: 95%;
             min-height: 35px;
         }
+
         .form table tr:nth-child(odd) td:not(:empty) {
             background-color: rgb(225, 241, 222);
         }
+
         .form table td {
             padding: 5px;
             /* width:100%; */
@@ -61,7 +67,7 @@
 
         .form button {
             user-select: none;
-            pointer-events:auto;
+            pointer-events: auto;
             border: none;
             color: rgb(10, 119, 83);
             background: none;
@@ -163,18 +169,18 @@
         </button>
 
         @if (session()->has('delete'))
-        <br><br>
-        <div
-            style="  background-color: rgb(190, 207, 186);
+            <br><br>
+            <div
+                style="  background-color: rgb(190, 207, 186);
                     color:rgb(0, 0, 0);margin: 0px 0px 14px 0px; width: calc(81% - 10px);
                     border: none; border-radius: 3px; display: flex; align-items: center; justify-content: center; height: 30px; ">
-            {{ session('message') }}
-        </div>
+                {{ session('message') }}
+            </div>
         @endif
-            @if ($search_modal == true)
-                <div id="myModal" class="modal"wire:ignore.self
+        @if ($search_modal == true)
+            <div id="myModal" class="modal"wire:ignore.self
                 style=" width: 700px; padding:10px; max-height:500px; overflow-y: auto; background-color:white;">
-                    <span wire:click="back()"
+                <span wire:click="back()"
                     style="cursor: pointer; float:right; width:21px; height: 21px;
                 border:1px solid black; border-radius:3px; color: rgb(10, 119, 83);
                 display: flex; justify-content: center; align-items: center; margin:0px 3px 0px 0px;">
@@ -201,19 +207,20 @@
                             </tr>
                             @foreach ($products as $item)
                                 <tr>
-                                    <td >{{ $loop->iteration }}
+                                    <td>{{ $loop->iteration }}
                                     </td>
-                                    <td style="max-width: 100px; word-wrap: break-word; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <td
+                                        style="max-width: 100px; word-wrap: break-word; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                         {{ $item->product_name }}
                                     </td>
-                                    {{-- text-overflow: ellipsis; white-space: nowrap; overflow: hidden;--}}
+                                    {{-- text-overflow: ellipsis; white-space: nowrap; overflow: hidden; --}}
                                     <td style="max-width: 250px; word-wrap: break-word; ">
                                         {{ $item->description }}
                                     </td>
-                                    <td >
+                                    <td>
                                         {{ $item->amount }}
                                     </td>
-                                    <td >
+                                    <td>
                                         {{ $item->product_type }}
                                     </td>
                                     <td>
@@ -226,8 +233,8 @@
                         @endif
                     </table>
                 </div>
-                </div>
-            @endif
+            </div>
+        @endif
 
 
         <table class="table">
@@ -255,13 +262,12 @@
                         <input type="text"placeholder="Product name" disabled
                             style="pointer-events:none;  user-select:none;"
                             wire:model="sale_products.{{ $index }}.product_name" />
-<br>
-                           @error("sale_products.{$index}.product_name")
 
-                        <span style="color: red; font-size: 0.7rem;">
-                            <br>{{ $message }}
-                        </span>
-                    @enderror
+                        @error("sale_products.{$index}.product_name")
+                            <span style="color: red; font-size: 0.7rem;">
+                                <br>{{ $message }}
+                            </span>
+                        @enderror
 
                     </td>
 
@@ -323,7 +329,7 @@
                         </button>
                     </td>
 
-                    @if (isset($profitRows[$index]))
+                    @if (isset($profitRows[$index]) && count($profitRows[$index]) > 0)
                         @foreach ($profitRows[$index] as $profitIndex => $profitRow)
                 <tr class="with-border" wire:key="{{ $index }}-profit-{{ $profitIndex }}">
                     <td></td>
@@ -390,7 +396,7 @@
     <table class="sales">
         <tr>
             <td>Expenditure:</td>
-            <td >{{ $expenditure }}</td>
+            <td>{{ $expenditure }}</td>
         </tr>
         <tr>
             <td>Profit: </td>

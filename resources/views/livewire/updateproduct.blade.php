@@ -76,35 +76,33 @@
     <form class="form">
 
         <h1>Update Product</h1>
-        <label for="product_name">Product name</label>
+        <label for="product_name">Product name*</label>
         <input type="text" class="form-control" wire:model="product_name" placeholder="Enter your product name" />
         @error('product_name')
-            <span>{{ $message }}</span>
+            <span style="color:red;">{{ $message }}</span>
         @enderror
 
-        <label for="description">Description</label>
+        <label for="description">Description*</label>
         <textarea id="description" name="description" wire:model="description" rows="4" cols="50"></textarea>
         @error('description')
-            <span>{{ $message }}</span>
+        <span style="color:red;">{{ $message }}</span>
         @enderror
 
 
-        <label for="amount">Amount</label>
+        <label for="amount">Amount*</label>
         <input type="number" class="form-control" wire:model="amount" placeholder="Enter your amount" />
         @error('amount')
-            <span>{{ $message }}</span>
+        <span style="color:red;">{{ $message }}</span>
         @enderror
 
-        <label for="product_type">Product type</label>
-        <select name="product_type" id="product_type" wire:model="product_type" required autofocus
-            autocomplete="username">
+        <label for="product_type">Product type*</label>
+        <select name="product_type" id="product_type" wire:model="product_type" required autofocus autocomplete="username">
+            <option value="" disabled>Please select</option>
             <option value="Finish">Finish</option>
-            <option>Please select</option>
             <option value="Unfinished">Unfinished</option>
-
         </select>
         @error('product_type')
-            <span>{{ $message }}</span>
+            <span style="color:red;">{{ $message }}</span>
         @enderror
 
 

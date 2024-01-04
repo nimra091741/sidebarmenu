@@ -66,12 +66,14 @@ class Createsale extends Component
     }
     public function addprofit($index)
     {
-        $this->profitRows[$index][] = [
-            'type' => "",
-            'description' => "",
-            'amount' => "",
-        ];
-        $this->calculateTotalProfit();
+        // if (isset($this->sale_products[$index]) && !empty($this->sale_products[$index])) {
+            $this->profitRows[$index][] = [
+                'type' => "",
+                'description' => "",
+                'amount' => "",
+            ];
+            $this->calculateTotalProfit();
+        // }
     }
     public function calculateTotalProfit()
     {
@@ -177,6 +179,7 @@ class Createsale extends Component
                     'date.required' => 'Date is required.',
                 ]
             );
+
             $sale = Sale::create([
                 'total_amount' => $this->total_amount,
                 'expenditure' => $this->expenditure,

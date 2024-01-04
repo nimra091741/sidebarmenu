@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Updateproduct extends Component
 {
-    public $product,$product_name, $description, $amount, $product_type, $id,$error_message;
+    public $product,$product_name, $description, $amount, $product_type, $id;
 
     public function mount($id)
     {
@@ -24,7 +24,7 @@ class Updateproduct extends Component
                 'product_name' => ['required', 'string', 'max:225'],
                 'description' => ['required'],
                 'amount' => ['required'],
-                'product_type' => ['required', 'string'],
+                'product_type' => ['required', 'in:Finish,Unfinished'],
             ]
         );
         try {
@@ -48,8 +48,8 @@ class Updateproduct extends Component
             }
         } catch (\Exception $e) {
             DB::rollback();
-            $error_message='This data has been deleted recently';
-            $this->error_message = $e->getMessage();
+             $error_message='This data has been deleted recently';
+            $error_message = $e->getMessage();
         }
     }
     public function render()
