@@ -47,9 +47,12 @@ class Createsale extends Component
                 $price = (float)$this->sale_products[$explode[1]]['product_price_with_profit'];
                 $quantity = (float)$this->sale_products[$explode[1]]['product_quantity'];
                 $this->sale_products[$explode[1]]['gross_price'] = $price * $quantity;
+                $this->sale_products[$explode[1]]['gross_price'] =
+                 number_format($this->sale_products[$explode[1]]['gross_price'], 2, '.', '');
             }
             $this->calculateTotalProfit();
-        } catch (\Exception $e) {
+        }
+         catch (\Exception $e) {
             $this->error_message = $e->getMessage();
             session()->flash('message', $e->getMessage());
         }
@@ -66,15 +69,14 @@ class Createsale extends Component
     }
     public function addprofit($index)
     {
-        // if (isset($this->sale_products[$index]) && !empty($this->sale_products[$index])) {
-            $this->profitRows[$index][] = [
-                'type' => "",
-                'description' => "",
-                'amount' => "",
-            ];
-            $this->calculateTotalProfit();
-        // }
+        $this->profitRows[$index][] = [
+            'type' => "",
+            'description' => "",
+            'amount' => "",
+        ];
+        $this->calculateTotalProfit();
     }
+
     public function calculateTotalProfit()
     {
         $this->total_amount  = 0;
@@ -84,6 +86,7 @@ class Createsale extends Component
             foreach ($this->sale_products as $product) {
                 if (isset($product['gross_price'])) {
                     $this->total_amount  += (float)$product['gross_price'];
+                    $this->total_amount = number_format($this->total_amount, 2, '.', '');
                 }
             }
             foreach ($this->profitRows as $profitRow) {
@@ -92,8 +95,11 @@ class Createsale extends Component
 
                     if ($profit['type'] === 'Profit') {
                         $this->profit += $amount;
+                        $this->profit = number_format($this->profit, 2, '.', '');
+                        // dd($this->profit);
                     } else if ($profit['type'] === 'Expense') {
                         $this->expenditure += $amount;
+                        $this->expenditure = number_format($this->expenditure, 2, '.', '');
                     }
                 }
             }
@@ -147,6 +153,7 @@ class Createsale extends Component
     }
     public function store()
     {
+
         try {
             $this->validate(
                 [
@@ -181,7 +188,7 @@ class Createsale extends Component
             );
 
             $sale = Sale::create([
-                'total_amount' => $this->total_amount,
+                'total_amount' => number_format($this->total_amount, 2, '.', ''),
                 'expenditure' => $this->expenditure,
                 'profit' => $this->profit,
                 'date' => $this->date,
@@ -192,16 +199,16 @@ class Createsale extends Component
                 $saleDetail = Saledetail::create([
                     'product_id' => $product['product_id'],
                     'sales_id' => $this->sales_id,
-                    'product_price_with_profit' => $product['product_price_with_profit'],
+                    'product_price_with_profit' => number_format($product['product_price_with_profit'], 2, '.', ''),
                     'product_quantity' => $product['product_quantity'],
-                    'gross_price' => $product['gross_price'],
+                    'gross_price' => number_format($product['gross_price'], 2, '.', ''),
                 ]);
-                // dd(2);
+
                 foreach ($this->profitRows[$index] as $profitIndex => $profitAndExpense) {
                     ProfitAndExpense::create([
                         'type' => $profitAndExpense['type'],
                         'description' => $profitAndExpense['description'],
-                        'amount' => $profitAndExpense['amount'],
+                        'amount' =>number_format($profitAndExpense['amount'], 2, '.', ''),
                         'sale_detail_id' => $saleDetail->id,
                         'sales_id' => $this->sales_id,
                     ]);
@@ -302,118 +309,3 @@ class Createsale extends Component
         ];
     }
 }
- // public function updated($key)
-    // {
-    //     try
-    //     {
-    //         $explode = explode('.', $key);
-    //         if (
-    //             count($explode) === 3 &&  isset(
-    //                 $this->sale_products[$explode[1]],
-    //                 $this->sale_products[$explode[1]]['product_price_with_profit'],
-    //                 $this->sale_products[$explode[1]]['product_quantity']
-    //             )
-    //         ) {
-    //             $price = $this->sale_products[$explode[1]]['product_price_with_profit'];
-    //             $quantity = $this->sale_products[$explode[1]]['product_quantity'];
-    //             $this->sale_products[$explode[1]]['gross_price'] = $price * $quantity;
-    //         }
-    //         $this->calculateTotalProfit();
-    //     }
-
-    // }
-//     public function deleteit($index, $profitIndex)
-// {
-//     if (isset($this->profitRows[$index][$profitIndex])
-//         // && is_array($this->profitRows[$index][$profitIndex])
-//     ) {
-//         $profit = $this->profitRows[$index][$profitIndex];
-//         if (is_array($profit)) {
-//             $amount = isset($profit['amount']) ? (float)$profit['amount'] : 0;
-
-//             if ($profit['type'] === 'Profit') {
-//                 $this->profit -= $amount;
-//             } else if ($profit['type'] === 'Expense') {
-//                 $this->expenditure -= $amount;
-//             }
-//             unset($this->profitRows[$index][$profitIndex]);
-
-//         }
-//         $this->profitRows[$index] = array_values($this->profitRows[$index]);
-//     }
-// }
-
-// public function addProductToTable($productId)
-    // {
-    //     try {
-    //     $product = Product::find($productId);
-    //     $existing_Product_Index = array_search($productId, array_column($this->sale_products, 'product_id'));
-    //     if ($existing_Product_Index !== false) {
-    //         $this->sale_products[$existing_Product_Index]['product_quantity'] += 1;
-    //         $this->sale_products[$existing_Product_Index]['gross_price'] =
-    //             (float)$this->sale_products[$existing_Product_Index]['product_quantity'] *
-    //             (float)$this->sale_products[$existing_Product_Index]['product_price_with_profit'];
-    //     }
-    //      else {
-
-    //         $empty_Row_Index = null;
-    //         foreach ($this->sale_products as $index => $row) {
-    //             if (empty($row['product_id'])) {
-    //                 $empty_Row_Index = $index;
-    //                 break;
-    //             }
-    //         }
-    //         if ($empty_Row_Index !== null) {
-
-    //             $this->sale_products[$empty_Row_Index] = [
-    //                 'product_id' => $product->id,
-    //                 'product_name' => $product->product_name,
-    //                 'product_price_with_profit' => $product->amount,
-    //                 'product_quantity' => (int)$this->sale_products[$empty_Row_Index]['product_quantity'] + 1,
-    //             ];
-    //         } else {
-
-    //             $this->sale_products[] = [
-    //                 'product_id' => $product->id,
-    //                 'product_name' => $product->product_name,
-    //                 'product_price_with_profit' => $product->amount,
-    //                 'product_quantity' => 1,
-    //                 'gross_price' =>$product->amount
-
-    //             ];
-    //         }
-    //     }
-    //     $this->search_modal = false;
-    //     $this->products = [];
-    //     $this->reset(['product_name']);
-    //     return $productId;
-    //     }
-    //     catch (\Exception $e) {
-    //         $this->error_message=$e->getMessage();
-
-    //     }
-    // }
-  // $explode = explode('.', $key);
-
-        // if (isset($this->sale_products[$explode['2']]['product_price_with_profit'], $this->sale_products[$explode['2']]['product_quantity'])) {
-        //     $price = $this->sale_products[$explode['2']]['product_price_with_profit'];
-        //     $quantity = $this->sale_products[$explode['2']]['product_quantity'];
-        //     $this->sale_products[$explode['2']]['gross_price'] = $price * $quantity;
-        // }
-        //      $this->calculateTotalProfit();
-        // if (isset($explode['2']) && $explode['2'] == 'product_id') {
-        //     $product = Product::where('id', $this->sale_products[$explode['1']]['product_id'])->select('amount')->first();
-        //     if (!empty($product)) {
-        //         $this->sale_products[$explode['1']]['product_price_with_profit'] = $product['amount'];
-        //     }
-        // }
-        // dd(1);
-        //  $this->searching();
-        // $explode = explode('.', $key);
-
-        //   if (!empty($this->sale_products[$explode['2']]['product_price_with_profit'] &&
-        //     $this->sale_products[$explode['2']]['product_quantity'])) {
-        //     $price = $this->sale_products[$explode['2']]['product_price_with_profit'];
-        //     $quantity = $this->sale_products[$explode['2']]['product_quantity'];
-        //     $this->sale_products[$explode['2']]['gross_price'] = $price * $quantity;
-        // }

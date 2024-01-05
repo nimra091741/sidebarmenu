@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire;
+
 use Livewire\WithPagination;
 use App\Models\Product;
 use Livewire\Component;
@@ -30,7 +31,7 @@ class Productlisting extends Component
         }
         $this->delete_modal = false;
     }
-    public $itemId,$delete_modal =false;
+    public $itemId, $delete_modal = false;
 
     public function openModal($id)
     {
@@ -42,7 +43,7 @@ class Productlisting extends Component
     {
         $this->delete_modal = false;
     }
-  // return redirect()->to(route('salelisting'));
-//  dd( $this->itemId );
+    // return redirect()->to(route('salelisting'));
+    //  dd( $this->itemId );
 
 }

@@ -304,7 +304,12 @@
                     </td>
 
                     <td style="display: flex; align-items: center;">
-                        <button style="width:30px;" wire:click.prevent="addprofit({{ $index }})">
+                        <button style="width:30px;" wire:click.prevent="addprofit({{ $index }})"
+                        {{ empty($sale_products[$index]['product_name']) ||
+                        empty($sale_products[$index]['product_price_with_profit']) ||
+                        empty($sale_products[$index]['product_quantity']) ||
+                        empty($sale_products[$index]['gross_price']) ? 'disabled' : '' }}
+                 >
                             <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="29"
                                 style="margin-top: -4px;" viewBox="0 0 24 24" fill="none" stroke="black"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -359,9 +364,10 @@
                         @enderror
                     </td>
                     <td>
-                        <input type="number" placeholder="0.00"
+                        <input type="text" placeholder="0.00" id="customInput"
                             wire:model="profitRows.{{ $index }}.{{ $profitIndex }}.amount"
-                            wire:change="calculateTotalProfit" />
+                            wire:change="calculateTotalProfit"
+                        />
                         @error("profitRows.{$index}.{$profitIndex}.amount")
                             <span style="color: red; font-size:0.7rem;">
                                 <br>{{ $message }}
@@ -396,15 +402,15 @@
     <table class="sales">
         <tr>
             <td>Expenditure:</td>
-            <td>{{ $expenditure }}</td>
+            <td   style="color: gray;">{{ $expenditure ?: '0.00' }}</td>
         </tr>
         <tr>
             <td>Profit: </td>
-            <td>{{ $profit }}</td>
+            <td  style="color: gray;">{{ $profit ?: '0.00' }}</td>
         </tr>
         <tr>
             <td>Total amount:</td>
-            <td>{{ $total_amount }}</td>
+            <td  style="color: gray;">{{ $total_amount  ?: '0.00'}}</td>
         </tr>
         <tr>
             <td> <button wire:click="store()">Add Sales</button></td>
@@ -412,16 +418,8 @@
     </table>
 
 
+
+
 </div>
 
-{{-- <script>
-        function openModal() {
-            document.getElementById('myModal').style.display = 'block';
-        }
 
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-            @this.set('product_name', '');
-            @this.set('products', []);
-        }
-    </script> --}}
